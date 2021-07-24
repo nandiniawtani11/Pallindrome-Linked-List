@@ -8,6 +8,70 @@
  *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
  * }
  */
+//First Solution
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+     public ListNode reverse(ListNode head1)
+    {
+         if(head1==null)
+		{
+			return head1;
+		}
+		ListNode current=head1;
+		ListNode previous=null;
+		ListNode next=null;
+		while(current!=null)
+		{
+			next=current.next;
+			current.next=previous;
+			previous=current;
+			current=next;
+		}
+		return previous;
+    }
+    public boolean isPalindrome(ListNode head) {
+        ListNode current=head;
+        ListNode newlist=null;
+        ListNode current1=newlist;
+        while(current!=null)
+        {
+            ListNode newNode=new ListNode(current.val);
+            if(newlist==null)
+            {
+                newlist=newNode;
+                current1=newlist;
+                newlist.next=null;
+            }
+            else
+            {
+                current1.next=newNode;
+                current1=newNode;
+            }
+            current=current.next;
+        }
+        ListNode rev=reverse(head);
+        while(rev!=null)
+        {
+            if(rev.val!=newlist.val)
+                return false;
+            newlist=newlist.next;
+            rev=rev.next;
+        }
+        return true;
+        
+    }
+}
+
+//Second Solution
 class Solution {
     //calculating length of list
     public int length(ListNode head) 
